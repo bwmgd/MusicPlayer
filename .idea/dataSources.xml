@@ -6,5 +6,10 @@
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:C:\Users\19711\AppData\Local\JetBrains\IntelliJIdea2020.2\android\databases\EMULATOR_Pixel_2_API_29\com.example.musicplayer\internal\music.db</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="MusicDB" uuid="2c461026-4179-4b08-a425-122970479ee6">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:C:\Users\19711\AppData\Local\JetBrains\IntelliJIdea2020.2\android\databases\SERIAL_NUMBER_60ded0a7\com.example.musicplayer\internal\music.db</jdbc-url>
+    </data-source>
   </component>
 </project>

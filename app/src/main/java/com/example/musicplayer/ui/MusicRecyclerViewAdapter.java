@@ -17,24 +17,23 @@ import java.util.List;
  */
 public class MusicRecyclerViewAdapter extends RecyclerView.Adapter<MusicRecyclerViewAdapter.MusicViewHolder> {
 
-    private final List<Music> mValues;
+    private final List<Music> mValues; //音乐list
 
     public List<Music> getValues() {
         return mValues;
     }
 
-    public void addItem(Music music) {
+    public void addItem(Music music) { //添加音乐
         mValues.add(music);
         notifyDataSetChanged();
     }
 
-    public void clearItem() {
+    public void clearItem() { //清空列表
         mValues.clear();
         notifyDataSetChanged();
     }
 
-    public Music getItem(int position) {
-        if (position < 0) return mValues.get(getItemCount() + position);
+    public Music getItem(int position) { //获取音乐
         return mValues.get(position);
     }
 

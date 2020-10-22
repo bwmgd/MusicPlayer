@@ -15,8 +15,6 @@ import android.provider.MediaStore;
 import android.provider.OpenableColumns;
 import android.util.Log;
 import androidx.annotation.RequiresApi;
-import com.example.musicplayer.MainActivity;
-import com.example.musicplayer.MusicApplication;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -25,10 +23,10 @@ import java.io.InputStream;
 
 public class MusicContent {
     public static class Music {
-        private long id;
-        private String name;
-        private String path;
-        private Uri url;
+        private long id; //音乐id
+        private String name; //音乐名称
+        private String path; //音乐绝对路径
+        private Uri url; //音乐uri标识
 
         public long getId() {
             return id;
@@ -61,18 +59,7 @@ public class MusicContent {
         public void setUrl(Uri url) {
             this.url = url;
         }
-
-        @Override
-        public String toString() {
-            return "Music{" +
-                    "name='" + name + '\'' +
-                    ", path='" + path + '\'' +
-                    ", url=" + url +
-                    '}';
-        }
     }
-
-    // public static final String AUTHORITY = "com.example.musicPlayer.domain.Words";//URI授权
 
     public static abstract class MusicColumns implements BaseColumns {
 

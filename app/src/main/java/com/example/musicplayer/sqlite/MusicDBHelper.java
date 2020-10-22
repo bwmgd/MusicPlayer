@@ -7,9 +7,9 @@ import android.util.Log;
 import com.example.musicplayer.domain.MusicContent;
 
 public class MusicDBHelper extends SQLiteOpenHelper {
-    private final static String DATABASE_NAME = "music.db";//数据库名字
-    private final static int DATABASE_VERSION = 1;//数据库版本
-
+    private final static String DATABASE_NAME = "music.db"; //数据库名字
+    private final static int DATABASE_VERSION = 1; //数据库版本
+    //建表语句
     private final static String SQL_CREATE_DATABASE = "CREATE TABLE "
             + MusicContent.MusicColumns.TABLE_NAME + " (" +
             MusicContent.MusicColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +

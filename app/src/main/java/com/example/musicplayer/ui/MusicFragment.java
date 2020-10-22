@@ -69,20 +69,22 @@ public class MusicFragment extends Fragment {
             else {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
+            //从数据库获取音乐
             ArrayList<MusicContent.Music> items = operationDB.getAllMusic();
             adapter = new MusicRecyclerViewAdapter(items);
             recyclerView.setAdapter(adapter);
-            ItemTouchHelper helper = new ItemTouchHelper(new MyItemTouchCallback(adapter));
-            helper.attachToRecyclerView(recyclerView);
+
         }
         return view;
     }
 
+    //添加音乐
     public void addItem(MusicContent.Music music){
         adapter.addItem(music);
         operationDB.insert(music);
     }
 
+    //清空列表
     public void clearItem(){
         adapter.clearItem();
         operationDB.clear();
