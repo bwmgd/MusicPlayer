@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">MusicPlayer</string>
+    <string name="previous">previous</string>
+    <string name="pause">pause</string>
+    <string name="next">next</string>
+    <string name="add">添加音乐</string>
+    <string name="single">单曲模式</string>
+    <string name="loop">循环模式</string>
+    <string name="random">随机播放</string>
+    <string name="clear">清空</string>
+    <string name="time_duration">00:00</string>
+    <string name="line">/</string>
+</resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/add" android:title="@string/add"/>
+    <item android:id="@+id/single" android:title="@string/single" android:checkable="true"/>
+    <item android:id="@+id/loop" android:title="@string/loop" android:checkable="true"/>
+    <item android:id="@+id/random" android:title="@string/random" android:checkable="true"/>
+    <item android:id="@+id/clear" android:title="@string/clear"/>
+</menu>
