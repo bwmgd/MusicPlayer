@@ -33,7 +33,6 @@ public class OperationDB {
      *
      * @param music 音乐
      */
-
     public void insert(Music music) {
         Log.v("sqlite", "insert");
         database = helper.getWritableDatabase();
