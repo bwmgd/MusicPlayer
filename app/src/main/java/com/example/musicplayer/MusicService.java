@@ -35,10 +35,44 @@ public class MusicService extends Service {
         playButton.setImageDrawable( //设置播放按钮
                 ContextCompat.getDrawable(MusicApplication.getContext(), android.R.drawable.ic_media_play));
     };
+
     /**
      * 单曲循环模式
      */
     private final MediaPlayer.OnCompletionListener SINGLE_LOOP = MediaPlayer::start;
+
+    /**
+     * 列表播放模式
+     */
+    private final MediaPlayer.OnCompletionListener MULTI_ONCE = mp -> {
+        resetMediaPlayer();
+        if (position < adapter.getItemCount() - 1) play(position + 1);
+        else playButton.setImageDrawable(
+                ContextCompat.getDrawable(MusicApplication.getContext(), android.R.drawable.ic_media_play));
+    };
+
+    /**
+     * 列表循环模式
+     */
+    private final MediaPlayer.OnCompletionListener MULTI_LOOP = mp -> {
+        resetMediaPlayer();
+        play(position + 1);
+    };
+
+    /**
+     * 随机模式
+     */
+    private final MediaPlayer.OnCompletionListener RANDOM_MOOD = mp -> {
+        resetMediaPlayer();
+        int position = -1;
+        if (adapter.getItemCount() > 1) {
+            do {
+                position = ThreadLocalRandom.current().nextInt(adapter.getItemCount()); //获取随机数
+            } while (position == this.position); //随机数相同情况下重新随机
+        }
+        play(position);
+    };
+
     /**
      * 获取position的handler
      */
@@ -59,35 +93,6 @@ public class MusicService extends Service {
     private Handler seekBarHandler; //与seekBar交互的handler
     private String path; //音乐播放路径
     private MediaPlayer.OnCompletionListener onCompletionListener; //播放完的事件监听
-    /**
-     * 列表播放模式
-     */
-    private final MediaPlayer.OnCompletionListener MULTI_ONCE = mp -> {
-        resetMediaPlayer();
-        if (position < adapter.getItemCount() - 1) play(position + 1);
-        else playButton.setImageDrawable(
-                ContextCompat.getDrawable(MusicApplication.getContext(), android.R.drawable.ic_media_play));
-    };
-    /**
-     * 列表循环模式
-     */
-    private final MediaPlayer.OnCompletionListener MULTI_LOOP = mp -> {
-        resetMediaPlayer();
-        play(position + 1);
-    };
-    /**
-     * 随机模式
-     */
-    private final MediaPlayer.OnCompletionListener RANDOM_MOOD = mp -> {
-        resetMediaPlayer();
-        int position = -1;
-        if (adapter.getItemCount() > 1) {
-            do {
-                position = ThreadLocalRandom.current().nextInt(adapter.getItemCount()); //获取随机数
-            } while (position == this.position); //随机数相同情况下重新随机
-        }
-        play(position);
-    };
 
     /**
      * 毫秒格式化为分秒模式
