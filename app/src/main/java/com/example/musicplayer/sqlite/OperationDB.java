@@ -106,6 +106,5 @@ public class OperationDB {
                 " path =(SELECT path FROM swap WHERE swap._id = ?)," +
                 " url =(SELECT url FROM swap WHERE swap._id = ?) WHERE " + MusicColumns._ID + " = ?";
         database.execSQL(sql, new Object[]{a, a, a, b});
-
     }
 }
