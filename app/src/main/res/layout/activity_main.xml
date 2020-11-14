@@ -23,7 +23,7 @@
             android:layout_marginTop="?attr/actionBarSize"
             android:layout_marginBottom="?attr/actionBarSize"
             android:padding="16dp"
-            tools:layout="@layout/music_fragment_item_list"/>
+            tools:layout="@layout/music_list_fragment"/>
     <SeekBar
             android:layout_width="match_parent"
             android:layout_height="40dp"
