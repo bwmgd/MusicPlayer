@@ -26,13 +26,23 @@ public class MusicService extends Service {
     private int position = -1; //播放列表
     private RecyclerView recyclerView;
     private MusicRecyclerViewAdapter adapter;
-    private final MediaPlayer.OnCompletionListener SINGLE_ONCE = mp -> { //单曲单词播放
+
+    /**
+     * 单曲单次播放
+     */
+    private final MediaPlayer.OnCompletionListener SINGLE_ONCE = mp -> {
         resetMediaPlayer();
         playButton.setImageDrawable( //设置播放按钮
                 ContextCompat.getDrawable(MusicApplication.getContext(), android.R.drawable.ic_media_play));
     };
-    private final MediaPlayer.OnCompletionListener SINGLE_LOOP = MediaPlayer::start; //单曲循环模式
-    private final Handler handler = new Handler(Looper.getMainLooper()) { //获取position的handler
+    /**
+     * 单曲循环模式
+     */
+    private final MediaPlayer.OnCompletionListener SINGLE_LOOP = MediaPlayer::start;
+    /**
+     * 获取position的handler
+     */
+    private final Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(@NonNull Message msg) {
             if (msg.what == MusicApplication.DELETE_CODE) { //删除控件后的修改
@@ -45,21 +55,30 @@ public class MusicService extends Service {
             }
         }
     };
-    private MediaPlayer.OnCompletionListener onCompletionListener; //播放完的事件监听
     private boolean musicFlag; //音乐正在播放标志
     private Handler seekBarHandler; //与seekBar交互的handler
     private String path; //音乐播放路径
-    private final MediaPlayer.OnCompletionListener MULTI_ONCE = mp -> { //列表播放模式
+    private MediaPlayer.OnCompletionListener onCompletionListener; //播放完的事件监听
+    /**
+     * 列表播放模式
+     */
+    private final MediaPlayer.OnCompletionListener MULTI_ONCE = mp -> {
         resetMediaPlayer();
         if (position < adapter.getItemCount() - 1) play(position + 1);
         else playButton.setImageDrawable(
                 ContextCompat.getDrawable(MusicApplication.getContext(), android.R.drawable.ic_media_play));
     };
-    private final MediaPlayer.OnCompletionListener MULTI_LOOP = mp -> { //列表循环模式
+    /**
+     * 列表循环模式
+     */
+    private final MediaPlayer.OnCompletionListener MULTI_LOOP = mp -> {
         resetMediaPlayer();
         play(position + 1);
     };
-    private final MediaPlayer.OnCompletionListener RANDOM_MOOD = mp -> { //随机模式
+    /**
+     * 随机模式
+     */
+    private final MediaPlayer.OnCompletionListener RANDOM_MOOD = mp -> {
         resetMediaPlayer();
         int position = -1;
         if (adapter.getItemCount() > 1) {
@@ -70,7 +89,13 @@ public class MusicService extends Service {
         play(position);
     };
 
-    private static String formatTime(int time) { //毫秒格式化为分秒模式
+    /**
+     * 毫秒格式化为分秒模式
+     *
+     * @param time 时间戳
+     * @return 格式化时间字符串
+     */
+    private static String formatTime(int time) {
         return String.format("%02d:%02d", (time /= 1000) / 60, time % 60);
     }
 
