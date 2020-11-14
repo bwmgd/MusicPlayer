@@ -92,20 +92,21 @@ public class OperationDB {
     public void swap(long a, long b) {
         Log.v("sqlite", "swap");
         database = helper.getWritableDatabase();
+        //若交换表存在则删除交换表
+        sql = "drop table if exists swap";
+        database.execSQL(sql);
         //新建表,复制两行数据
-        sql = "CREATE TABLE swap AS SELECT * FROM " + MusicColumns._ID + " WHERE _id = ? OR _id = ?";
+        sql = "CREATE TABLE swap AS SELECT * FROM " + MusicColumns.TABLE_NAME + " WHERE _id = ? OR _id = ?";
         database.execSQL(sql, new Object[]{a, b});
         //分别更新两行数据
-        sql = "UPDATE " + MusicColumns._ID + " SET name =(SELECT name FROM swap WHERE swap._id = ?)," +
+        sql = "UPDATE " + MusicColumns.TABLE_NAME + " SET name =(SELECT name FROM swap WHERE swap._id = ?)," +
                 " path=(SELECT path FROM swap WHERE swap._id = ?)," +
-                " url=(SELECT url FROM swap WHERE swap._id = ?) WHERE " + MusicColumns._ID + "._id = ?";
+                " url=(SELECT url FROM swap WHERE swap._id = ?) WHERE " + MusicColumns._ID + " = ?";
         database.execSQL(sql, new Object[]{b, b, b, a});
-        sql = "UPDATE " + MusicColumns._ID + " SET name= (SELECT name FROM swap WHERE swap._id = ?)," +
+        sql = "UPDATE " + MusicColumns.TABLE_NAME + " SET name= (SELECT name FROM swap WHERE swap._id = ?)," +
                 " path =(SELECT path FROM swap WHERE swap._id = ?)," +
-                " url =(SELECT url FROM swap WHERE swap._id = ?) WHERE " + MusicColumns._ID + "._id = ?";
+                " url =(SELECT url FROM swap WHERE swap._id = ?) WHERE " + MusicColumns._ID + " = ?";
         database.execSQL(sql, new Object[]{a, a, a, b});
-        //删除交换表
-        sql = "DROP TABLE swap";
-        database.execSQL(sql);
+
     }
 }
